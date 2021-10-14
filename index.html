@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link href="./styles/style.css " rel="stylesheet" type="text/css" />
+
+    <title>Projeto Oras Bolas</title>
+  </head>
+  <body>
+    <header>
+      <h1>Projeto Oras Bolas</h1>
+      <nav>
+        <ul>
+          <li class="actived">
+            <a href="index.html">Gráficos</a>
+          </li>
+          <!-- <li>
+            <a href="pages/simulacao.html">Simulação</a>
+          </li> -->
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div id="graficos">
+        <div class="grafico" id="gTraj"></div>
+        <div class="grafico" id="gXxT"></div>
+        <div class="grafico" id="gYxT"></div>
+      </div>
+    </main>
+
+    <!--Biblioteca do google charts-->
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+
+    <script type="text/javascript" src="../scripts/carregaDados.js"></script>
+    <script type="text/javascript" src="../scripts/gTraj.js"></script>
+    <script type="text/javascript" src="../scripts/gXeYxT.js"></script>
+  </body>
+</html>
