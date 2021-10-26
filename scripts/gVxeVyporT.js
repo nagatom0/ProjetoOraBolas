@@ -10,10 +10,13 @@ async function drawVxporT() {
     "../data/Ora_bolas-trajetoria _bola_2018b.dat"
   );
 
-  const dadosVx = content.map((line) => [
-    line[0],
-    eval(funcoes.vx.replace("x", `*${line[0]}`)),
-  ]);
+  let dadosVx = [];
+  for (let i = 0; i < content.t.length; i++) {
+    dadosVx.push([
+      content.t[i],
+      await eval(funcoes.vx.replace("x", `*${content.t[i]}`)),
+    ]);
+  }
 
   dadosVx.unshift(["t(s)", "vx(m/s)"]);
 
@@ -46,10 +49,13 @@ async function drawVyporT() {
     "../data/Ora_bolas-trajetoria _bola_2018b.dat"
   );
 
-  const dadosVy = content.map((line) => [
-    line[0],
-    eval(funcoes.vy.replace("x", `*${line[0]}`)),
-  ]);
+  let dadosVy = [];
+  for (let i = 0; i < content.t.length; i++) {
+    dadosVy.push([
+      content.t[i],
+      await eval(funcoes.vy.replace("x", `*${content.t[i]}`)),
+    ]);
+  }
 
   dadosVy.unshift(["t(s)", "vy(m/s)"]);
   const dataVy = google.visualization.arrayToDataTable(dadosVy);

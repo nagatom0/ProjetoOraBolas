@@ -10,10 +10,13 @@ async function drawAxporT() {
     "../data/Ora_bolas-trajetoria _bola_2018b.dat"
   );
 
-  const dadosAx = content.map((line) => [
-    line[0],
-    eval(funcoes.ax.replace("x", `*${line[0]}`)),
-  ]);
+  let dadosAx = [];
+  for (let i = 0; i < content.t.length; i++) {
+    dadosAx.push([
+      content.t[i],
+      await eval(funcoes.ax.replace("x", `*${content.t[i]}`)),
+    ]);
+  }
 
   dadosAx.unshift(["t(s)", "ax(m/s²)"]);
 
@@ -46,10 +49,13 @@ async function drawAyporT() {
     "../data/Ora_bolas-trajetoria _bola_2018b.dat"
   );
 
-  const dadosAy = content.map((line) => [
-    line[0],
-    eval(funcoes.ay.replace("x", `*${line[0]}`)),
-  ]);
+  let dadosAy = [];
+  for (let i = 0; i < content.t.length; i++) {
+    dadosAy.push([
+      content.t[i],
+      await eval(funcoes.ay.replace("x", `*${content.t[i]}`)),
+    ]);
+  }
 
   dadosAy.unshift(["t(s)", "ay(m/s²)"]);
   const dataAy = google.visualization.arrayToDataTable(dadosAy);

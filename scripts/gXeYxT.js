@@ -19,8 +19,10 @@ async function drawXporT() {
     "../data/Ora_bolas-trajetoria _bola_2018b.dat"
   );
 
-  const dadosX = content.map((line) => [line[0], line[1]]);
-
+  let dadosX = [];
+  for (let i = 0; i < content.t.length; i++) {
+    dadosX.push([content.t[i], content.x[i]]);
+  }
   funcoes.x = regression.polynomial(dadosX).string;
   funcoes.vx = derivada(funcoes.x);
   funcoes.ax = derivada(funcoes.vx);
@@ -56,7 +58,10 @@ async function drawYporT() {
     "../data/Ora_bolas-trajetoria _bola_2018b.dat"
   );
 
-  const dadosY = content.map((line) => [line[0], line[2]]);
+  let dadosY = [];
+  for (let i = 0; i < content.t.length; i++) {
+    dadosY.push([content.t[i], content.y[i]]);
+  }
 
   funcoes.y = regression.polynomial(dadosY).string;
   funcoes.vy = derivada(funcoes.y);
