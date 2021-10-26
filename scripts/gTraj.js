@@ -8,13 +8,10 @@ async function drawChart() {
     "../data/Ora_bolas-trajetoria _bola_2018b.dat"
   );
 
-  console.log(content);
-
   const dados = content.map((line) => [line[1], line[2]]);
   dados.unshift(["x(m)", "y(m)"]);
 
   const data = google.visualization.arrayToDataTable(dados);
-  console.log(data);
 
   const options = {
     title: "Trajetória da bola",
