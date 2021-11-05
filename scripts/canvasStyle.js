@@ -65,3 +65,17 @@ function apontaRobo(gr, img, r, x, y) {
   ctx.drawImage(img, -r, -r, 2 * r, 2 * r);
   ctx.restore();
 }
+
+function desenhaLinha([xa, ya], [xb, yb]) {
+  xa = xa * 1000;
+  xb = xb * 1000;
+  ya = canvas.height - ya * 1000;
+  yb = canvas.height - yb * 1000;
+  ctx.beginPath();
+  ctx.strokeStyle = "#ff0000";
+  ctx.lineWidth = 10;
+  ctx.moveTo(xa, ya);
+  ctx.lineTo(xb, yb);
+  ctx.stroke();
+  ctx.closePath();
+}

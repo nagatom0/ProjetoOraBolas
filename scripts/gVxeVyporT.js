@@ -20,7 +20,7 @@ async function drawVxporT() {
 
   dadosVx.unshift(["t(s)", "vx(m/s)"]);
 
-  const dataVx = google.visualization.arrayToDataTable(dadosVx);
+  const dataVx = await google.visualization.arrayToDataTable(dadosVx);
 
   let options = {
     title: "vx da bola em função do tempo",
@@ -58,7 +58,7 @@ async function drawVyporT() {
   }
 
   dadosVy.unshift(["t(s)", "vy(m/s)"]);
-  const dataVy = google.visualization.arrayToDataTable(dadosVy);
+  const dataVy = await google.visualization.arrayToDataTable(dadosVy);
 
   options = {
     title: "vy da bola em função do tempo",

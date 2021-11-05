@@ -8,6 +8,7 @@ const bola = {
   },
   x: 0,
   y: 0,
+  t: 0,
 };
 
 const robo = {
@@ -15,10 +16,20 @@ const robo = {
   raio: 90,
   x: 0,
   y: 0,
+  trajetoria: {
+    x: [],
+    y: [],
+  },
+  velMax: 2,
+  v: 0,
+  aMax: 2.6,
+  graus: 0,
+  dInter: 0.1,
 };
 
 const simulacao = {
   t: 0,
+  d: 0,
 };
 
 function primeiraPosicaoRobo() {
@@ -46,6 +57,13 @@ function primeiraPosicaoRobo() {
     robo.y = y;
     // robo.dDaBolaInicial = d;
   } while (d > 1 || x < 0 || y < 0);
+
+  console.log("1 p Robo ->", robo.x, robo.y);
+
+  // robo.x = 1.360187489717013;
+  // robo.y = 1.2373402791260575;
+
+  defineTrajetoriaRobo();
 }
 
 let graus = 0;
@@ -53,24 +71,32 @@ function trajetoria() {
   bola.x = bola.trajetoria.x[simulacao.t];
   bola.y = bola.trajetoria.y[simulacao.t];
 
-  dx = Math.abs(robo.x - bola.x).toFixed(2);
-  dy = Math.abs(robo.y - bola.y).toFixed(2);
-  graus = Math.atan(dy / dx) * (180 / Math.PI);
+  robo.x = robo.trajetoria.x[simulacao.t];
+  robo.y = robo.trajetoria.y[simulacao.t];
 
-  if (robo.x > bola.x) {
-    graus = 180 - graus;
-  }
-
-  if (robo.y < bola.y) {
-    graus = -graus;
-  }
-
-  apontaRobo(graus, robo.img, robo.raio, robo.x, robo.y);
+  apontaRobo(robo.graus, robo.img, robo.raio, robo.x, robo.y);
   desenhaImagem(bola.img, bola.raio, bola.x, bola.y);
-  // desenhaImagem(robo.img, robo.raio, robo.x, robo.y);
+  desenhaLinha(
+    [robo.x, robo.y],
+    [
+      robo.trajetoria.x[robo.trajetoria.x.length - 1],
+      robo.trajetoria.y[robo.trajetoria.y.length - 1],
+    ]
+  );
 
-  if (simulacao.t == bola.trajetoria.t.length) {
+  const distancia = Math.sqrt(
+    Math.pow(robo.x - bola.x, 2) + Math.pow(robo.y - bola.y, 2)
+  );
+  simulacao.d = distancia;
+  console.log("Distancia ->", simulacao.d);
+  console.log("Velocidade Robo ->", robo.v);
+  console.log("--------------------------------------------------");
+
+  if (simulacao.t == bola.trajetoria.t.length || simulacao.d <= robo.dInter) {
     simulacao.t = 0;
+    simulacao.d = 0;
+    robo.trajetoria.x = [];
+    robo.trajetoria.y = [];
     resetCanvas();
     primeiraPosicaoRobo();
   } else {
@@ -78,6 +104,71 @@ function trajetoria() {
   }
 
   setTimeout(trajetoria, 20);
+}
+
+function defineTrajetoriaRobo() {
+  const xRobo = robo.x;
+  const yRobo = robo.y;
+  let d = 0;
+  let menorD = "";
+  t = 0;
+  for (let i = 0; i < bola.trajetoria.t.length; i++) {
+    const xBola = bola.trajetoria.x[i];
+    const yBola = bola.trajetoria.y[i];
+
+    d = Math.sqrt(Math.pow(xRobo - xBola, 2) + Math.pow(yRobo - yBola, 2));
+    if (d > menorD && menorD != "") {
+      t = i;
+      const vm = menorD / bola.trajetoria.t[t];
+      if (vm > robo.velMax) {
+        menorD = d;
+        continue;
+      }
+      robo.v = vm;
+      break;
+    }
+
+    if (d < menorD || menorD == "") {
+      menorD = d;
+    }
+  }
+
+  const xBola = bola.trajetoria.x[t];
+  const yBola = bola.trajetoria.y[t];
+  console.log("Bola ->", xBola, yBola);
+  console.log("Robo ->", xRobo, yRobo);
+
+  console.log("t ->", t, bola.trajetoria.t[t]);
+
+  let b = xRobo;
+  let a = (xBola - xRobo) / bola.trajetoria.t[t];
+
+  for (let i = 0; i < t; i++) {
+    const valor = a * bola.trajetoria.t[i] + b;
+    robo.trajetoria.x.push(valor);
+  }
+
+  b = yRobo;
+  a = (yBola - yRobo) / bola.trajetoria.t[t];
+
+  for (let i = 0; i < t; i++) {
+    const valor = a * bola.trajetoria.t[i] + b;
+    robo.trajetoria.y.push(valor);
+  }
+
+  dx = Math.abs(robo.x - xBola).toFixed(2);
+  dy = Math.abs(robo.y - yBola).toFixed(2);
+  graus = Math.atan(dy / dx) * (180 / Math.PI);
+
+  if (robo.x > xBola) {
+    graus = 180 - graus;
+  }
+
+  if (robo.y < yBola) {
+    graus = -graus;
+  }
+
+  robo.graus = graus;
 }
 
 async function main() {
