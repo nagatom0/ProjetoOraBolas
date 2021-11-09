@@ -2,10 +2,10 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 const imgBola = new Image();
-imgBola.src = "../img/bola.png";
+imgBola.src = "./img/bola.png";
 
 const imgRobo = new Image();
-imgRobo.src = "../img/robo.png";
+imgRobo.src = "./img/robo.png";
 
 imgBola.onload = () => desenhaCampo();
 imgRobo.onload = () => desenhaCampo();
