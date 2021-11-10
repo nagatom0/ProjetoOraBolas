@@ -170,8 +170,8 @@ async function defineTrajetoriaRobo() {
       v: [],
       a: [],
     },
-    velMax: 2.8,
-    aMax: 2.8,
+    velMax: robo.velMax,
+    aMax: robo.aMax,
     graus: 0,
     dInter: 0.1,
     x0: robo.x0,
@@ -211,8 +211,8 @@ async function defineTrajetoriaRobo() {
     const cos = (xBola - xRobo) / dRoboBola;
     const sen = (yBola - yRobo) / dRoboBola;
 
-    const posX = xRobo + cos * 0.052;
-    const posY = yRobo + sen * 0.04;
+    const posX = xRobo + (cos * robo.trajetoria.v[i]) / 40;
+    const posY = yRobo + (sen * robo.trajetoria.v[i]) / 40;
 
     robo.trajetoria.x.push(posX);
     robo.trajetoria.y.push(posY);
