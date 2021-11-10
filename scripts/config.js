@@ -1,5 +1,5 @@
 const bola = {
-  raio: 25,
+  raio: 25 / 2,
   trajetoria: {
     t: [],
     x: [],
@@ -10,19 +10,26 @@ const bola = {
   t: 0,
 };
 
-const robo = {
-  raio: 90,
+let robo = {
+  raio: 45,
   x: 0,
   y: 0,
   trajetoria: {
     x: [],
     y: [],
+    v: [],
+    a: [],
   },
-  velMax: 2,
-  v: 0,
-  aMax: 2.6,
+  velMax: 2.8,
+  aMax: 2.8,
   graus: 0,
   dInter: 0.1,
   x0: "",
   y0: "",
+};
+
+let simulacao = {
+  t: 0,
+  tFinal: 0,
+  d: [],
 };

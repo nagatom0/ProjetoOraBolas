@@ -33,8 +33,13 @@
 			</div>
 		</div>
 		<div class="body clearfix">
-      <canvas id="canvas" width="9000" height="6000"></canvas>
-			<p style="font-size:15px;">
+			<div class="pos-inputs">
+				<input type="text" placeholder="Posição x do robô" id="xRobo">
+				<input type="text" placeholder="Posição y do robô" id="yRobo">
+				<button type="button" id="btnSubmit">Enviar</button>
+			</div>
+      <canvas id="canvas" width="4500" height="3000"></canvas>
+			<p id="pDist">
 				
 			</p>
 		</div>
@@ -56,21 +61,21 @@
 				</p>
 			</li>
 			<li>
-				<div class="grafico" id="gXxT"></div>
+				<div class="grafico" id="gXxTBola"></div>
 				<h3>Grafico 3</h3>
 				<p>
 					
 				</p>
 			</li>
 			<li>
-				<div class="grafico" id="gYxT"></div>
+				<div class="grafico" id="gYxTBola"></div>
 				<h3>Grafico 4</h3>
 				<p>
 					
 				</p>
 			</li>
 			<li>
-				<div class="grafico" id="gVxxT"></div>
+				<div class="grafico" id="gXxTRobo"></div>
 				<h3>Grafico 5</h3>
 				<p>
 					
@@ -78,7 +83,7 @@
 
 			</li>
 			<li>
-				<div class="grafico" id="gVyxT"></div>
+				<div class="grafico" id="gYxTRobo"></div>
 				<h3>Grafico 6</h3>
 				<p>
 					
@@ -86,7 +91,7 @@
 
 			</li>
 			<li>
-				<div class="grafico" id="gAxxT"></div>
+				<div class="grafico" id="gVxxTBola"></div>
 				<h3>Grafico 7</h3>
 				<p>
 					
@@ -94,8 +99,64 @@
 
 			</li>
 			<li>
-				<div class="grafico" id="gAyxT"></div>
+				<div class="grafico" id="gVyxTBola"></div>
 				<h3>Grafico 8</h3>
+				<p>
+					
+				</p>
+
+			</li>
+			<li>
+				<div class="grafico" id="gVxxTRobo"></div>
+				<h3>Grafico 9</h3>
+				<p>
+					
+				</p>
+
+			</li>
+			<li>
+				<div class="grafico" id="gVyxTRobo"></div>
+				<h3>Grafico 10</h3>
+				<p>
+					
+				</p>
+
+			</li>
+			<li>
+				<div class="grafico" id="gAxxTBola"></div>
+				<h3>Grafico 11</h3>
+				<p>
+					
+				</p>
+
+			</li>
+			<li>
+				<div class="grafico" id="gAyxTBola"></div>
+				<h3>Grafico 12</h3>
+				<p>
+					
+				</p>
+
+			</li>
+			<li>
+				<div class="grafico" id="gAxxTRobo"></div>
+				<h3>Grafico 13</h3>
+				<p>
+					
+				</p>
+
+			</li>
+			<li>
+				<div class="grafico" id="gAyxTRobo"></div>
+				<h3>Grafico 14</h3>
+				<p>
+					
+				</p>
+
+			</li>
+			<li>
+				<div class="grafico" id="gDist"></div>
+				<h3>Grafico 15</h3>
 				<p>
 					
 				</p>
@@ -112,13 +173,13 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/regression/2.0.1/regression.js"></script>
 	<script type="text/javascript" src="./scripts/carregaDados.js"></script>
 	<script type="text/javascript" src="./scripts/config.js"></script>
-	<script type="text/javascript" src="./scripts/carregaConfig.js"></script>
 	<script type="text/javascript" src="./scripts/derivada.js"></script>
 	<script type="text/javascript" src="./scripts/gTraj.js"></script>
 	<script type="text/javascript" src="./scripts/gXeYxT.js"></script>
 	<script type="text/javascript" src="./scripts/gVxeVyporT.js"></script>
 	<script type="text/javascript" src="./scripts/gAxeAyporT.js"></script>
-
+	<script type="text/javascript" src="./scripts/gDxT.js"></script>
+	<script type="text/javascript" src="./scripts/carregaConfig.js"></script>
   <script type="text/javascript" src="./scripts/canvasStyle.js"></script>
   <script type="text/javascript" src="./scripts/canvas.js"></script>
 	</body>

@@ -1,7 +1,4 @@
-const simulacao = {
-  t: 0,
-  d: 0,
-};
+const pDist = document.getElementById("pDist");
 
 let graus = 0;
 function trajetoria() {
@@ -11,48 +8,42 @@ function trajetoria() {
   robo.x = robo.trajetoria.x[simulacao.t];
   robo.y = robo.trajetoria.y[simulacao.t];
 
+  const dx = Math.abs(robo.x - bola.x).toFixed(2);
+  const dy = Math.abs(robo.y - bola.y).toFixed(2);
+  let graus = Math.atan(dy / dx) * (180 / Math.PI);
+
+  if (robo.x > bola.x) {
+    graus = 180 - graus;
+  }
+
+  if (robo.y < bola.y) {
+    graus = -graus;
+  }
+
+  robo.graus = graus;
+
   apontaRobo(robo.graus, imgRobo, robo.raio, robo.x, robo.y);
   desenhaImagem(imgBola, bola.raio, bola.x, bola.y);
-  desenhaLinha(
-    [robo.x, robo.y],
-    [
-      robo.trajetoria.x[robo.trajetoria.x.length - 1],
-      robo.trajetoria.y[robo.trajetoria.y.length - 1],
-    ]
-  );
 
-  const distancia = Math.sqrt(
-    Math.pow(robo.x - bola.x, 2) + Math.pow(robo.y - bola.y, 2)
-  );
-  simulacao.d = distancia;
-  console.log("Distancia ->", simulacao.d);
-  console.log("Velocidade Robo ->", robo.v);
-  console.log("--------------------------------------------------");
+  const d = simulacao.d[simulacao.t];
 
-  if (simulacao.t == bola.trajetoria.t.length || simulacao.d <= robo.dInter) {
+  pDist.innerText = `Distância entre a bola e o robô: ${d.toFixed(3)} m`;
+
+  if (
+    (simulacao.t == simulacao.tFinal && simulacao.t != 0) ||
+    simulacao.t == bola.trajetoria.t.length
+  ) {
     simulacao.t = 0;
-    simulacao.d = 0;
-    robo.trajetoria.x = [];
-    robo.trajetoria.y = [];
+
     resetCanvas();
-    primeiraPosicaoRobo();
   } else {
     simulacao.t++;
   }
-
-  // if (simulacao.t == 2) {
-  //   setTimeout(trajetoria, 9000);
-  // } else {
-  //   // setTimeout(trajetoria, 20);
-  // }
-  setTimeout(trajetoria, 20);
 }
 
 async function main() {
   desenhaImagem(imgBola, bola.raio, bola.x, bola.y);
-  desenhaImagem(imgRobo, robo.raio, robo.x, robo.y);
+  desenhaImagem(imgRobo, robo.raio, robo.x0, robo.y0);
 
-  setTimeout(trajetoria, 200);
+  setInterval(trajetoria, 20);
 }
-
-main();

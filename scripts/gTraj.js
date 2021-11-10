@@ -2,8 +2,6 @@ const grafTrajBola = document.getElementById("gTrajBola");
 const grafTrajRobo = document.getElementById("gTrajRobo");
 
 google.charts.load("current", { packages: ["corechart"] });
-google.charts.setOnLoadCallback(drawChartBola);
-google.charts.setOnLoadCallback(drawChartRobo);
 
 async function drawChartBola() {
   let dados = [];
@@ -16,8 +14,8 @@ async function drawChartBola() {
 
   const options = {
     title: "Trajetória da bola",
-    hAxis: { title: "X(m)", minValue: 0, maxValue: 9 },
-    vAxis: { title: "Y(m)", minValue: 0, maxValue: 6 },
+    hAxis: { title: "x(m)", minValue: 0, maxValue: 9 },
+    vAxis: { title: "y(m)", minValue: 0, maxValue: 6 },
     pointSize: 0.1,
     legend: "none",
   };
@@ -38,8 +36,8 @@ async function drawChartRobo() {
 
   const options = {
     title: "Trajetória do robo",
-    hAxis: { title: "X(m)", minValue: 0, maxValue: 9 },
-    vAxis: { title: "Y(m)", minValue: 0, maxValue: 6 },
+    hAxis: { title: "x(m)", minValue: 0, maxValue: 9 },
+    vAxis: { title: "y(m)", minValue: 0, maxValue: 6 },
     pointSize: 0.1,
     legend: "none",
   };

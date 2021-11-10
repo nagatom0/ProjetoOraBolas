@@ -15,15 +15,15 @@ function desenhaCampo() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ctx.strokeStyle = "#fff";
-  ctx.lineWidth = 50;
+  ctx.lineWidth = 25 / 2;
   ctx.beginPath();
   ctx.moveTo(canvas.width / 2, 0);
   ctx.lineTo(canvas.width / 2, canvas.height);
   ctx.stroke();
 
-  ctx.strokeRect(-20, canvas.height / 3, 500, canvas.height / 3);
+  ctx.strokeRect(-20, canvas.height / 3, 350, canvas.height / 3);
   ctx.strokeRect(
-    canvas.width - 500 + 20,
+    canvas.width - 350 + 20,
     canvas.height / 3,
     500,
     canvas.height / 3
@@ -31,13 +31,13 @@ function desenhaCampo() {
   ctx.closePath();
 
   ctx.beginPath();
-  ctx.arc(canvas.width / 2, canvas.height / 2, 500, 0, Math.PI * 2);
+  ctx.arc(canvas.width / 2, canvas.height / 2, 350, 0, Math.PI * 2);
   ctx.stroke();
   ctx.closePath();
 
   ctx.beginPath();
   ctx.fillStyle = "#fff";
-  ctx.arc(canvas.width / 2, canvas.height / 2, 100, 0, Math.PI * 2);
+  ctx.arc(canvas.width / 2, canvas.height / 2, 50, 0, Math.PI * 2);
   ctx.fill();
   ctx.closePath();
 }
@@ -50,14 +50,14 @@ function resetCanvas() {
 }
 
 function desenhaImagem(img, r, x, y) {
-  x = x * 1000;
-  y = canvas.height - y * 1000;
+  x = x * 500;
+  y = canvas.height - y * 500;
   ctx.drawImage(img, x - r, y - r, 2 * r, 2 * r);
 }
 
 function apontaRobo(gr, img, r, x, y) {
-  x = x * 1000;
-  y = canvas.height - y * 1000;
+  x = x * 500;
+  y = canvas.height - y * 500;
   resetCanvas();
   ctx.save();
   ctx.translate(x, y);
@@ -67,10 +67,10 @@ function apontaRobo(gr, img, r, x, y) {
 }
 
 function desenhaLinha([xa, ya], [xb, yb]) {
-  xa = xa * 1000;
-  xb = xb * 1000;
-  ya = canvas.height - ya * 1000;
-  yb = canvas.height - yb * 1000;
+  xa = xa * 500;
+  xb = xb * 500;
+  ya = canvas.height - ya * 500;
+  yb = canvas.height - yb * 500;
   ctx.beginPath();
   ctx.strokeStyle = "#ff0000";
   ctx.lineWidth = 10;
