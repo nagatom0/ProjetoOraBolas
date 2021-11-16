@@ -10,14 +10,14 @@
 }
 body {
   font-family: Arial, Helvetica, sans-serif;
-  min-width: 960px;
+  min-width: 70%;
   margin: 0;
 }
 img {
   border: 0;
 }
 .wrapper {
-  width: 960px;
+  width: 70%;
   margin: 0 auto;
 }
 .clearfix:after {
@@ -97,7 +97,7 @@ img {
   display: block;
 }
 #contents .body {
-  width: 940px;
+  width: 70%;
   margin: 0 auto;
   padding: 0 10px;
 }
@@ -118,7 +118,7 @@ img {
 }
 
 #adbox {
-  background: #49a6cc url(../img/robot.png) no-repeat 100% 25%;
+  background: #49a6cc url(../img/robot.png) no-repeat 100% 20%;
   font-family: Georgia, "Times New Roman", Times, serif;
   min-height: 500px;
   margin: -56px 0 22px;
@@ -129,7 +129,7 @@ img {
   *top: -50px;
 }
 #adbox .wrapper {
-  width: 940px;
+  width: 70%;
   padding: 54px 10px 26px;
 }
 #adbox .info {
@@ -163,10 +163,11 @@ img {
   color: #49a6cc;
   font-size: 34px;
   line-height: 82px;
-  width: 940px;
+  width: 70%;
   margin: 0 auto;
   padding: 0 9px;
   text-shadow: -2px 0 2px #49a6cc;
+  display: none;
 }
 #adbox div.highlight h2 i {
   font-weight: normal;
@@ -192,38 +193,6 @@ img {
   line-height: 24px;
   margin: 0;
   padding: 0 0 6px;
-}
-
-#featured {
-  display: block;
-  list-style: none;
-  width: 960px;
-  margin: 0 auto;
-  padding: 30px 0;
-}
-
-#featured li {
-  float: left;
-  width: 220px;
-  margin: 0 10px;
-  text-align: center;
-}
-#featured li h3 {
-  color: #ffffff;
-  font-size: 20px;
-  margin: 18px 0;
-}
-#featured li h3 a {
-  color: #ffffff;
-  text-decoration: none;
-}
-#featured li h3 a:hover {
-  color: #ffffff;
-}
-#featured li p {
-  color: #ffffff;
-  font-size: 15px;
-  text-align: center;
 }
 
 #canvas {
@@ -257,7 +226,36 @@ img {
   cursor: pointer;
 }
 
-p#pDist {
+.graficos {
+  width: 85%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 60px auto 0;
+  padding-bottom: 60px;
+  gap: 40px;
+}
+
+.grafico {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#campo {
+  display: none;
+  grid-template-columns: 5fr 1fr;
+}
+
+.infos {
+  margin-left: 10px;
+}
+
+#campo .infos p {
+  margin: 0 0 10px;
+  padding: 0;
   color: #222;
-  font-size: 18px;
+  text-align: initial;
+  font-size: 16px;
 }

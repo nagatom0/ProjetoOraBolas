@@ -1,6 +1,8 @@
 const pXRobo = document.getElementById("xRobo");
 const pYRobo = document.getElementById("yRobo");
 const btn = document.getElementById("btnSubmit");
+const campo = document.getElementById("campo");
+const campoT = document.getElementById("campoTitle");
 
 btn.addEventListener("click", () => {
   btn.disabled = true;
@@ -9,6 +11,9 @@ btn.addEventListener("click", () => {
     parseFloat(pXRobo.value.replace(", ", ".")),
     parseFloat(pYRobo.value.replace(", ", "."))
   );
+
+  campo.style.display = "grid";
+  campoT.style.display = "block";
 });
 
 async function carregaConfig() {
@@ -65,100 +70,6 @@ function primeiraPosicaoRobo(px, py) {
   defineTrajetoriaRobo();
 }
 
-// function defineTrajetoriaRobo() {
-//   const xRobo = robo.x;
-//   const yRobo = robo.y;
-
-//   for (let i = 0; i < bola.trajetoria.t.length; i++) {
-//     const v = robo.aMax * bola.trajetoria.t[i];
-//     if (v <= robo.velMax) {
-//       console.log(v);
-//       robo.trajetoria.v.push(v.toFixed(3));
-//       robo.trajetoria.a.push(robo.aMax);
-//     } else {
-//       robo.trajetoria.v.push(robo.velMax);
-//       const a = robo.velMax / parseFloat(bola.trajetoria.t[i]);
-//       robo.trajetoria.a.push(a.toFixed(3));
-//     }
-//   }
-
-//   const v = robo.trajetoria.v.map((valor) =>
-//     valor.toString().replace(".", ",")
-//   );
-
-//   const vA = robo.trajetoria.a.map((valor) =>
-//     valor.toString().replace(".", ",")
-//   );
-
-//   console.log(v.join("\n"));
-//   console.log(vA.join("\n"));
-
-//   let d = 0;
-//   let menorD = "";
-//   t = 0;
-//   for (let i = 0; i < bola.trajetoria.t.length; i++) {
-//     const xBola = bola.trajetoria.x[i];
-//     const yBola = bola.trajetoria.y[i];
-
-//     d = Math.sqrt(Math.pow(xRobo - xBola, 2) + Math.pow(yRobo - yBola, 2));
-//     if (d > menorD && menorD != "") {
-//       t = i;
-
-//       const vm = menorD / bola.trajetoria.t[t];
-//       console.log("MenorD ->", menorD);
-//       console.log("velocidade ->", vm);
-//       if (vm > robo.velMax) {
-//         menorD = d;
-//         continue;
-//       }
-//       robo.v = vm;
-//       break;
-//     }
-
-//     if (d < menorD || menorD == "") {
-//       menorD = d;
-//     }
-//   }
-//   console.log("t ->", bola.trajetoria.t[t]);
-
-//   const xBola = bola.trajetoria.x[t];
-//   const yBola = bola.trajetoria.y[t];
-//   console.log("Bola ->", xBola, yBola);
-//   console.log("Robo ->", xRobo, yRobo);
-
-//   console.log("t ->", t, bola.trajetoria.t[t]);
-
-//   let b = xRobo;
-//   let a = (xBola - xRobo) / bola.trajetoria.t[t];
-
-//   for (let i = 0; i < t; i++) {
-//     const valor = a * bola.trajetoria.t[i] + b;
-//     robo.trajetoria.x.push(valor);
-//   }
-
-//   b = yRobo;
-//   a = (yBola - yRobo) / bola.trajetoria.t[t];
-
-//   for (let i = 0; i < t; i++) {
-//     const valor = a * bola.trajetoria.t[i] + b;
-//     robo.trajetoria.y.push(valor);
-//   }
-
-//   dx = Math.abs(robo.x - xBola).toFixed(2);
-//   dy = Math.abs(robo.y - yBola).toFixed(2);
-//   graus = Math.atan(dy / dx) * (180 / Math.PI);
-
-//   if (robo.x > xBola) {
-//     graus = 180 - graus;
-//   }
-
-//   if (robo.y < yBola) {
-//     graus = -graus;
-//   }
-
-//   robo.graus = graus;
-// }
-
 async function defineTrajetoriaRobo() {
   robo = {
     raio: 45,
@@ -211,8 +122,8 @@ async function defineTrajetoriaRobo() {
     const cos = (xBola - xRobo) / dRoboBola;
     const sen = (yBola - yRobo) / dRoboBola;
 
-    const posX = xRobo + (cos * robo.trajetoria.v[i]) / 40;
-    const posY = yRobo + (sen * robo.trajetoria.v[i]) / 40;
+    const posX = xRobo + (cos * robo.trajetoria.v[i] * 2) / 100;
+    const posY = yRobo + (sen * robo.trajetoria.v[i] * 2) / 100;
 
     robo.trajetoria.x.push(posX);
     robo.trajetoria.y.push(posY);
@@ -226,20 +137,13 @@ async function defineTrajetoriaRobo() {
     }
   }
 
-  drawChartBola();
-  drawChartRobo();
-  drawXporTBola();
-  drawYporTBola();
-  drawXporTRobo();
-  drawYporTRobo();
-  drawVxporTBola();
-  drawVyporTBola();
-  drawVxporTRobo();
-  drawVyporTRobo();
-  drawAxporTBola();
-  drawAyporTBola();
-  drawAxporTRobo();
-  drawAyporTRobo();
+  drawTraj();
+  drawXporT();
+  drawYporT();
+  drawVxporT();
+  drawVyporT();
+  drawAxporT();
+  drawAyporT();
   drawChart();
 
   main();

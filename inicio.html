@@ -29,7 +29,7 @@
 				</div>
 			</div>
 			<div class="highlight">
-				<h2> CAMPO
+				<h2 id="campoTitle" > CAMPO
 			</div>
 		</div>
 		<div class="body clearfix">
@@ -38,131 +38,32 @@
 				<input type="text" placeholder="Posição y do robô" id="yRobo">
 				<button type="button" id="btnSubmit">Enviar</button>
 			</div>
-      <canvas id="canvas" width="4500" height="3000"></canvas>
+			<div id="campo">
+				<canvas id="canvas" width="4500" height="3000"></canvas>
+				<div class="infos">
+					<p id="pInst"></p>
+					<p id="pPosBola"></p>
+					<p id="pPosRobo"></p>
+					<p id="pVelRobo"></p>
+					<p id="pDist"></p>
+				</div>
+			</div>
 			<p id="pDist">
 				
 			</p>
 		</div>
 	</div>
 	<div id="footer">
-		<ul id="featured" class="wrapper clearfix">
-			<li>
-        <div class="grafico" id="gTrajBola"></div>
-				<h3>Grafico 1</h3>
-				<p>
-					
-				</p>
-			</li>
-			<li>
-        <div class="grafico" id="gTrajRobo"></div>
-				<h3>Grafico 2</h3>
-				<p>
-					
-				</p>
-			</li>
-			<li>
-				<div class="grafico" id="gXxTBola"></div>
-				<h3>Grafico 3</h3>
-				<p>
-					
-				</p>
-			</li>
-			<li>
-				<div class="grafico" id="gYxTBola"></div>
-				<h3>Grafico 4</h3>
-				<p>
-					
-				</p>
-			</li>
-			<li>
-				<div class="grafico" id="gXxTRobo"></div>
-				<h3>Grafico 5</h3>
-				<p>
-					
-				</p>
-
-			</li>
-			<li>
-				<div class="grafico" id="gYxTRobo"></div>
-				<h3>Grafico 6</h3>
-				<p>
-					
-				</p>
-
-			</li>
-			<li>
-				<div class="grafico" id="gVxxTBola"></div>
-				<h3>Grafico 7</h3>
-				<p>
-					
-				</p>
-
-			</li>
-			<li>
-				<div class="grafico" id="gVyxTBola"></div>
-				<h3>Grafico 8</h3>
-				<p>
-					
-				</p>
-
-			</li>
-			<li>
-				<div class="grafico" id="gVxxTRobo"></div>
-				<h3>Grafico 9</h3>
-				<p>
-					
-				</p>
-
-			</li>
-			<li>
-				<div class="grafico" id="gVyxTRobo"></div>
-				<h3>Grafico 10</h3>
-				<p>
-					
-				</p>
-
-			</li>
-			<li>
-				<div class="grafico" id="gAxxTBola"></div>
-				<h3>Grafico 11</h3>
-				<p>
-					
-				</p>
-
-			</li>
-			<li>
-				<div class="grafico" id="gAyxTBola"></div>
-				<h3>Grafico 12</h3>
-				<p>
-					
-				</p>
-
-			</li>
-			<li>
-				<div class="grafico" id="gAxxTRobo"></div>
-				<h3>Grafico 13</h3>
-				<p>
-					
-				</p>
-
-			</li>
-			<li>
-				<div class="grafico" id="gAyxTRobo"></div>
-				<h3>Grafico 14</h3>
-				<p>
-					
-				</p>
-
-			</li>
-			<li>
-				<div class="grafico" id="gDist"></div>
-				<h3>Grafico 15</h3>
-				<p>
-					
-				</p>
-
-			</li>
-		</ul>
+		<div class="graficos">
+			<div class="grafico" id="gTraj"></div>
+			<div class="grafico" id="gDist"></div>
+			<div class="grafico" id="gXxT"></div>
+			<div class="grafico" id="gYxT"></div>
+			<div class="grafico" id="gVxxT"></div>
+			<div class="grafico" id="gVyxT"></div>
+			<div class="grafico" id="gAxxT"></div>
+			<div class="grafico" id="gAyxT"></div>
+		</div>
 	</div>
 	<!--Biblioteca do google charts-->
 	<script

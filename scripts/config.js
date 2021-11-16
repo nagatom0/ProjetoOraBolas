@@ -23,7 +23,7 @@ let robo = {
   velMax: 2.8,
   aMax: 2.8,
   graus: 0,
-  dInter: 0.1,
+  dInter: 0.09,
   x0: "",
   y0: "",
 };

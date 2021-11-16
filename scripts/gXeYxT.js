@@ -1,7 +1,5 @@
-const grafXporTBola = document.getElementById("gXxTBola");
-const grafYporTBola = document.getElementById("gYxTBola");
-const grafXporTRobo = document.getElementById("gXxTRobo");
-const grafYporTRobo = document.getElementById("gYxTRobo");
+const grafXporT = document.getElementById("gXxT");
+const grafYporT = document.getElementById("gYxT");
 
 const funcoesBola = {
   x: "",
@@ -14,7 +12,7 @@ const funcoesBola = {
 
 google.charts.load("current", { packages: ["corechart"] });
 
-async function drawXporTBola() {
+async function drawXporT() {
   const content = await fileContent(
     "../data/Ora_bolas-trajetoria _bola_2018b.dat"
   );
@@ -27,19 +25,23 @@ async function drawXporTBola() {
   funcoesBola.vx = derivada(funcoesBola.x);
   funcoesBola.ax = derivada(funcoesBola.vx);
 
-  dadosX.unshift(["t(s)", "x(m)"]);
+  dadosX.unshift(["t(s)", "Bola"]);
 
-  const dataX = google.visualization.arrayToDataTable(dadosX);
+  const dataXBola = google.visualization.arrayToDataTable(dadosX);
+
+  dadosX = [];
+  for (let i = 0; i < bola.trajetoria.t.length; i++) {
+    dadosX.push([bola.trajetoria.t[i], robo.trajetoria.x[i]]);
+  }
+  dadosX.unshift(["t(s)", "Robô"]);
+
+  const dataXRobo = google.visualization.arrayToDataTable(dadosX);
 
   let options = {
-    title: "Posição x da bola em função do tempo",
+    title: "Posição x em função do tempo",
     hAxis: { title: "t(s)", minValue: 0, maxValue: 10 },
     vAxis: { title: "x(m)", minValue: 0, maxValue: 9 },
     pointSize: 0.1,
-    legend: {
-      alignment: "end",
-      position: "none",
-    },
     trendlines: {
       0: {
         type: "polynomial",
@@ -47,13 +49,28 @@ async function drawXporTBola() {
         color: "",
       },
     },
+    series: {
+      0: { color: "#DC3912" },
+      1: { color: "#3366CC" },
+    },
+    width: 628,
+    height: 400,
   };
 
-  const chartX = new google.visualization.ScatterChart(grafXporTBola);
-  chartX.draw(dataX, options);
+  const joinedData = google.visualization.data.join(
+    dataXBola,
+    dataXRobo,
+    "full",
+    [[0, 0]],
+    [1],
+    [1]
+  );
+
+  const chartX = new google.visualization.ScatterChart(grafXporT);
+  chartX.draw(joinedData, options);
 }
 
-async function drawYporTBola() {
+async function drawYporT() {
   const content = await fileContent(
     "../data/Ora_bolas-trajetoria _bola_2018b.dat"
   );
@@ -67,18 +84,22 @@ async function drawYporTBola() {
   funcoesBola.vy = derivada(funcoesBola.y);
   funcoesBola.ay = derivada(funcoesBola.vy);
 
-  dadosY.unshift(["t(s)", "y(m)"]);
-  const dataY = google.visualization.arrayToDataTable(dadosY);
+  dadosY.unshift(["t(s)", "Bola"]);
+  const dataYBola = google.visualization.arrayToDataTable(dadosY);
+
+  dadosY = [];
+  for (let i = 0; i < bola.trajetoria.t.length; i++) {
+    dadosY.push([bola.trajetoria.t[i], robo.trajetoria.y[i]]);
+  }
+  dadosY.unshift(["t(s)", "Robô"]);
+
+  const dataYRobo = google.visualization.arrayToDataTable(dadosY);
 
   options = {
-    title: "Posição y da bola em função do tempo",
+    title: "Posição y em função do tempo",
     hAxis: { title: "t(s)", minValue: 0, maxValue: 10 },
     vAxis: { title: "y(m)", minValue: 0, maxValue: 6 },
     pointSize: 0.1,
-    legend: {
-      alignment: "end",
-      position: "none",
-    },
     trendlines: {
       0: {
         type: "polynomial",
@@ -86,80 +107,23 @@ async function drawYporTBola() {
         color: "",
       },
     },
+    series: {
+      0: { color: "#DC3912" },
+      1: { color: "#3366CC" },
+    },
+    width: 628,
+    height: 400,
   };
 
-  const chartY = new google.visualization.ScatterChart(grafYporTBola);
-  chartY.draw(dataY, options);
-}
+  const joinedData = google.visualization.data.join(
+    dataYBola,
+    dataYRobo,
+    "full",
+    [[0, 0]],
+    [1],
+    [1]
+  );
 
-async function drawXporTRobo() {
-  let dados = [];
-  for (let i = 0; i < bola.trajetoria.t.length; i++) {
-    dados.push([bola.trajetoria.t[i], robo.trajetoria.x[i]]);
-  }
-  dados.unshift(["t(s)", "x(m)"]);
-
-  const data = google.visualization.arrayToDataTable(dados);
-
-  options = {
-    title: "Posição x do robô em função do tempo",
-    hAxis: { title: "t(s)", minValue: 0, maxValue: 10 },
-    vAxis: {
-      title: "x(m)",
-      minValue: 0,
-      maxValue: Math.max(robo.trajetoria.x),
-    },
-    pointSize: 0.1,
-    legend: {
-      alignment: "end",
-      position: "none",
-    },
-    trendlines: {
-      0: {
-        type: "polynomial",
-        pointsVisible: false,
-        color: "",
-      },
-    },
-  };
-
-  const chart = new google.visualization.ScatterChart(grafXporTRobo);
-
-  chart.draw(data, options);
-}
-
-async function drawYporTRobo() {
-  let dados = [];
-  for (let i = 0; i < bola.trajetoria.t.length; i++) {
-    dados.push([bola.trajetoria.t[i], robo.trajetoria.y[i]]);
-  }
-  dados.unshift(["t(s)", "y(m)"]);
-
-  const data = google.visualization.arrayToDataTable(dados);
-
-  options = {
-    title: "Posição y do robô em função do tempo",
-    hAxis: { title: "t(s)", minValue: 0, maxValue: 10 },
-    vAxis: {
-      title: "y(m)",
-      minValue: 0,
-      maxValue: Math.max(robo.trajetoria.y),
-    },
-    pointSize: 0.1,
-    legend: {
-      alignment: "end",
-      position: "none",
-    },
-    trendlines: {
-      0: {
-        type: "polynomial",
-        pointsVisible: false,
-        color: "",
-      },
-    },
-  };
-
-  const chart = new google.visualization.ScatterChart(grafYporTRobo);
-
-  chart.draw(data, options);
+  const chartY = new google.visualization.ScatterChart(grafYporT);
+  chartY.draw(joinedData, options);
 }

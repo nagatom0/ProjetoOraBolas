@@ -1,11 +1,9 @@
-const grafVxporTBola = document.getElementById("gVxxTBola");
-const grafVyporTBola = document.getElementById("gVyxTBola");
-const grafVxporTRobo = document.getElementById("gVxxTRobo");
-const grafVyporTRobo = document.getElementById("gVyxTRobo");
+const grafVxporT = document.getElementById("gVxxT");
+const grafVyporT = document.getElementById("gVyxT");
 
 google.charts.load("current", { packages: ["corechart"] });
 
-async function drawVxporTBola() {
+async function drawVxporT() {
   const content = await fileContent(
     "../data/Ora_bolas-trajetoria _bola_2018b.dat"
   );
@@ -18,19 +16,23 @@ async function drawVxporTBola() {
     ]);
   }
 
-  dadosVx.unshift(["t(s)", "vx(m/s)"]);
+  dadosVx.unshift(["t(s)", "Bola"]);
 
-  const dataVx = await google.visualization.arrayToDataTable(dadosVx);
+  const dataVxBola = await google.visualization.arrayToDataTable(dadosVx);
+
+  dadosVx = [];
+  for (let i = 0; i < robo.trajetoria.v.length; i++) {
+    dadosVx.push([bola.trajetoria.t[i], robo.trajetoria.v[i]]);
+  }
+  dadosVx.unshift(["t(s)", "Robô"]);
+
+  const dataVxRobo = google.visualization.arrayToDataTable(dadosVx);
 
   let options = {
-    title: "Componente x da velocidade da bola em função do tempo",
+    title: "Componente x da velocidade em função do tempo",
     hAxis: { title: "t(s)", minValue: 0, maxValue: 10 },
-    vAxis: { title: "vx(m/s)", minValue: 0, maxValue: 9 },
+    vAxis: { title: "vx(m/s)", minValue: 0, maxValue: 4 },
     pointSize: 0.1,
-    legend: {
-      alignment: "end",
-      position: "none",
-    },
     trendlines: {
       0: {
         type: "polynomial",
@@ -38,13 +40,28 @@ async function drawVxporTBola() {
         color: "",
       },
     },
+    series: {
+      0: { color: "#DC3912" },
+      1: { color: "#3366CC" },
+    },
+    width: 628,
+    height: 400,
   };
 
-  const chartVx = new google.visualization.ScatterChart(grafVxporTBola);
-  chartVx.draw(dataVx, options);
+  const joinedData = google.visualization.data.join(
+    dataVxBola,
+    dataVxRobo,
+    "full",
+    [[0, 0]],
+    [1],
+    [1]
+  );
+
+  const chartVx = new google.visualization.ScatterChart(grafVxporT);
+  chartVx.draw(joinedData, options);
 }
 
-async function drawVyporTBola() {
+async function drawVyporT() {
   const content = await fileContent(
     "../data/Ora_bolas-trajetoria _bola_2018b.dat"
   );
@@ -57,53 +74,24 @@ async function drawVyporTBola() {
     ]);
   }
 
-  dadosVy.unshift(["t(s)", "vy(m/s)"]);
-  const dataVy = await google.visualization.arrayToDataTable(dadosVy);
+  dadosVy.unshift(["t(s)", "Bola"]);
 
-  options = {
-    title: "Componente y da velocidade da bola em função do tempo",
-    hAxis: { title: "t(s)", minValue: 0, maxValue: 10 },
-    vAxis: { title: "vy(m/s)", minValue: 0, maxValue: 6 },
-    pointSize: 0.1,
-    legend: {
-      alignment: "end",
-      position: "none",
-    },
-    trendlines: {
-      0: {
-        type: "polynomial",
-        pointsVisible: false,
-        color: "",
-      },
-    },
-  };
+  const dataVyBola = await google.visualization.arrayToDataTable(dadosVy);
 
-  const chartVy = new google.visualization.ScatterChart(grafVyporTBola);
-  chartVy.draw(dataVy, options);
-}
-
-async function drawVxporTRobo() {
-  let dados = [];
+  dadosVy = [];
   for (let i = 0; i < robo.trajetoria.v.length; i++) {
-    dados.push([bola.trajetoria.t[i], robo.trajetoria.v[i]]);
+    dadosVy.push([bola.trajetoria.t[i], robo.trajetoria.v[i]]);
   }
-  dados.unshift(["t(s)", "vx(m/s)"]);
 
-  const data = google.visualization.arrayToDataTable(dados);
+  dadosVy.unshift(["t(s)", "Robô"]);
+
+  const dataVyRobo = google.visualization.arrayToDataTable(dadosVy);
 
   options = {
-    title: "Componente x da velocidade do robô em função do tempo",
+    title: "Componente y da velocidade em função do tempo",
     hAxis: { title: "t(s)", minValue: 0, maxValue: 10 },
-    vAxis: {
-      title: "vx(m/s)",
-      minValue: 0,
-      maxValue: 4,
-    },
+    vAxis: { title: "vy(m/s)", minValue: 0, maxValue: 4 },
     pointSize: 0.1,
-    legend: {
-      alignment: "end",
-      position: "none",
-    },
     trendlines: {
       0: {
         type: "polynomial",
@@ -111,45 +99,23 @@ async function drawVxporTRobo() {
         color: "",
       },
     },
+    series: {
+      0: { color: "#DC3912" },
+      1: { color: "#3366CC" },
+    },
+    width: 628,
+    height: 400,
   };
 
-  const chart = new google.visualization.ScatterChart(grafVxporTRobo);
+  const joinedData = google.visualization.data.join(
+    dataVyBola,
+    dataVyRobo,
+    "full",
+    [[0, 0]],
+    [1],
+    [1]
+  );
 
-  chart.draw(data, options);
-}
-
-async function drawVyporTRobo() {
-  let dados = [];
-  for (let i = 0; i < robo.trajetoria.v.length; i++) {
-    dados.push([bola.trajetoria.t[i], robo.trajetoria.v[i]]);
-  }
-  dados.unshift(["t(s)", "vy(m/s)"]);
-
-  const data = google.visualization.arrayToDataTable(dados);
-
-  options = {
-    title: "Componente y da velocidade do robô em função do tempo",
-    hAxis: { title: "t(s)", minValue: 0, maxValue: 10 },
-    vAxis: {
-      title: "vx(m/s)",
-      minValue: 0,
-      maxValue: 4,
-    },
-    pointSize: 0.1,
-    legend: {
-      alignment: "end",
-      position: "none",
-    },
-    trendlines: {
-      0: {
-        type: "polynomial",
-        pointsVisible: false,
-        color: "",
-      },
-    },
-  };
-
-  const chart = new google.visualization.ScatterChart(grafVyporTRobo);
-
-  chart.draw(data, options);
+  const chartVy = new google.visualization.ScatterChart(grafVyporT);
+  chartVy.draw(joinedData, options);
 }

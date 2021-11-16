@@ -17,6 +17,8 @@ async function drawChart() {
     vAxis: { title: "d(m)", minValue: 0, maxValue: Math.max(simulacao.d) },
     pointSize: 0.1,
     legend: "none",
+    width: 628,
+    height: 400,
   };
 
   const chart = new google.visualization.ScatterChart(grafDist);
