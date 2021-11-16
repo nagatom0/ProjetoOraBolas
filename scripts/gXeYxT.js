@@ -84,6 +84,8 @@ async function drawYporT() {
   funcoesBola.vy = derivada(funcoesBola.y);
   funcoesBola.ay = derivada(funcoesBola.vy);
 
+  console.log(funcoesBola);
+
   dadosY.unshift(["t(s)", "Bola"]);
   const dataYBola = google.visualization.arrayToDataTable(dadosY);
 
